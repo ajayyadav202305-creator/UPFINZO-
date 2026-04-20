@@ -1,111 +1,56 @@
 # UPFINZO Landing Page
 
-A modern landing page built using **React.js** and **Tailwind CSS** with clean component-based architecture.
+<!--
+Upfinzo Landing Page
+React + Tailwind CSS (CDN)
+Architecture: Component-Based (Scalable & Maintainable)
+Author: AI-generated from Figma design
 
----
+Project Architecture:
+The UPFINZO landing page follows a clean and scalable React architecture.
+The project is organized into multiple folders for better maintainability
+and reusability.
 
-#  Project Structure
-
+Folder Structure:
 
 src/
-├── components/
-│   ├── Navbar.jsx
-│   └── Footer.jsx
-│
-├── sections/
-│   ├── HeroSection.jsx
-│   ├── StatsSection.jsx
-│   ├── SuiteSection.jsx
-│   ├── WhySection.jsx
-│   ├── ApiSection.jsx
-│   ├── IndustrySection.jsx
-│   └── FutureSection.jsx
-│
-├── hooks/
-│   └── useScroll.js
-│
-├── App.jsx
-└── main.jsx
+├── components/   → Reusable UI components (Navbar, Footer, Button, Card)
+├── sections/     → Page sections (Hero, Stats, Suite, Why, API, etc.)
+├── hooks/        → Custom React hooks (useScroll, useToggle, animations)
+├── utils/        → Helper functions and utilities
+├── data/         → Static data and configuration
+├── assets/       → Images, icons, and fonts
+├── App.jsx       → Root component
+└── main.jsx      → Entry point
 
+Component Tree:
 
----
-
-#  Component Architecture
-
-```
 <App>
- ├── Navbar
- ├── HeroSection
- ├── StatsSection
- ├── SuiteSection
- ├── WhySection
- ├── ApiSection
- ├── IndustrySection
- ├── FutureSection
- └── Footer
-```
+  ├── Navbar
+  ├── HeroSection
+  ├── StatsSection
+  ├── SuiteSection
+  ├── WhySection
+  ├── ApiSection
+  ├── IndustrySection
+  ├── FutureSection
+  └── Footer
 
----
+Hooks Used:
 
-#  App.jsx
+useState  → Mobile menu toggle
+useEffect → Animations
+useRef    → Canvas DOM reference
 
-```jsx
-import Navbar from "./components/Navbar"
-import Footer from "./components/Footer"
+Features:
 
-import HeroSection from "./sections/HeroSection"
-import StatsSection from "./sections/StatsSection"
-import SuiteSection from "./sections/SuiteSection"
-import WhySection from "./sections/WhySection"
-import ApiSection from "./sections/ApiSection"
-import IndustrySection from "./sections/IndustrySection"
-import FutureSection from "./sections/FutureSection"
-
-function App() {
-  return (
-    <>
-      <Navbar />
-      <HeroSection />
-      <StatsSection />
-      <SuiteSection />
-      <WhySection />
-      <ApiSection />
-      <IndustrySection />
-      <FutureSection />
-      <Footer />
-    </>
-  )
-}
-
-export default App
-```
-
-
-
-#  Tech Stack
-
-* React.js
-* Tailwind CSS
-* JavaScript
-* HTML5
-
-
-
-#  Features
-
-* Component-based architecture
-* Clean folder structure
-* Responsive UI
-* Reusable components
-* Smooth animations
-
-
-#  Hooks Used
-
-* useState → UI toggle
-* useEffect → Animation & lifecycle
-* useRef → DOM reference
-
+- Clean component-based architecture
+- Reusable components
+- Scalable folder structure
+- Responsive design
+- Smooth animations
+- Performance optimized
+-->
 
 
 # Author
