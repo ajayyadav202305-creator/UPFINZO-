@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>UzOFin — AI-powered Banking & Payment Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --p:#7c3aed;--p2:#9333ea;--p3:#a855f7;--p4:#c084fc;
+  --c:#06b6d4;--c2:#22d3ee;--c3:#67e8f9;
+  --g:#10b981;--g2:#34d399;
+  --bg:#000000;--bg2:#050508;--bg3:#08080f;
+  --card:#0c0c14;--card2:#101018;
+  --bdr:rgba(255,255,255,0.08);
+  --t:#ffffff;--t2:rgba(255,255,255,0.6);--t3:rgba(255,255,255,0.35);--t4:rgba(255,255,255,0.2);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t);font-family:'Inter',sans-serif;overflow-x:hidden;line-height:1.6}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:#000}
+::-webkit-scrollbar-thumb{background:var(--p);border-radius:2px}
+
+/* ══ NAV ══ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;height:68px;
+  background:rgba(0,0,0,0.6);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--bdr);
+}
+.logo-wrap{display:flex;flex-direction:column;gap:1px}
+.logo-text{
+  font-size:1.35rem;font-weight:800;letter-spacing:-0.02em;
+  display:flex;align-items:center;gap:1px;
+}
+.logo-o-ring{
+  display:inline-block;width:16px;height:16px;border-radius:50%;
+  background:conic-gradient(#06b6d4,#7c3aed,#10b981,#06b6d4);
+  animation:spin 5s linear infinite;vertical-align:middle;margin:0 1px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.logo-sub{font-size:0.6rem;font-weight:500;color:var(--t3);letter-spacing:0.08em}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{
+  color:var(--t2);text-decoration:none;font-size:0.875rem;font-weight:500;
+  transition:color 0.2s;display:flex;align-items:center;gap:4px;
+}
+.nav-links a:hover,.nav-links a.act{color:var(--t)}
+.nav-links a.act{font-weight:600}
+.chevron{font-size:0.6rem;color:var(--t3)}
+.nav-btn{
+  background:var(--p);color:#fff;border:none;
+  padding:0.55rem 1.4rem;border-radius:100px;
+  font-size:0.875rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all 0.25s;
+  box-shadow:0 0 20px rgba(124,58,237,0.4);
+}
+.nav-btn:hover{background:var(--p2);box-shadow:0 0 30px rgba(124,58,237,0.6);transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:22px;height:1.5px;background:var(--t);border-radius:2px}
+
+/* ══ HERO ══ */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:7rem 2rem 5rem;
+  overflow:hidden;
+}
+/* Big arc shapes from Figma */
+.arc-left{
+  position:absolute;left:-15%;top:-10%;
+  width:65%;height:120%;
+  border-radius:50%;
+  border:1px solid transparent;
+  background:
+    linear-gradient(#000,#000) padding-box,
+    linear-gradient(135deg,rgba(6,182,212,0.5),rgba(124,58,237,0.3),rgba(16,185,129,0.2)) border-box;
+  transform:rotate(-15deg);
+  pointer-events:none;
+}
+.arc-right{
+  position:absolute;right:-20%;top:-15%;
+  width:60%;height:110%;
+  border-radius:50%;
+  border:1px solid transparent;
+  background:
+    linear-gradient(#000,#000) padding-box,
+    linear-gradient(225deg,rgba(236,72,153,0.4),rgba(124,58,237,0.3),rgba(6,182,212,0.15)) border-box;
+  transform:rotate(10deg);
+  pointer-events:none;
+}
+.arc-left-fill{
+  position:absolute;left:-20%;top:-5%;
+  width:50%;height:90%;
+  border-radius:50%;
+  background:linear-gradient(135deg,rgba(6,182,212,0.08) 0%,rgba(124,58,237,0.06) 50%,transparent 100%);
+  transform:rotate(-15deg);
+  pointer-events:none;
+}
+.arc-right-fill{
+  position:absolute;right:-25%;top:-10%;
+  width:55%;height:100%;
+  border-radius:50%;
+  background:linear-gradient(225deg,rgba(236,72,153,0.07) 0%,rgba(124,58,237,0.05) 50%,transparent 100%);
+  transform:rotate(10deg);
+  pointer-events:none;
+}
+.hero-content{position:relative;z-index:5;max-width:860px}
+.hero h1{
+  font-size:clamp(2.2rem,5.5vw,4.2rem);
+  font-weight:800;line-height:1.12;
+  letter-spacing:-0.03em;margin-bottom:1.25rem;
+  animation:fadeUp 0.8s ease both;
+}
+.hero h1 .grad{
+  background:linear-gradient(90deg,var(--c2) 0%,var(--p4) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero p{
+  font-size:1rem;color:var(--t2);max-width:540px;
+  margin:0 auto 2.25rem;line-height:1.75;
+  animation:fadeUp 0.8s 0.1s ease both;
+}
+.hero-btns{
+  display:flex;gap:0.875rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.8s 0.2s ease both;
+}
+.btn-solid{
+  background:var(--p);color:#fff;border:none;
+  padding:0.75rem 1.875rem;border-radius:100px;
+  font-size:0.9375rem;font-weight:700;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all 0.25s;
+  box-shadow:0 0 24px rgba(124,58,237,0.45);
+}
+.btn-solid:hover{background:var(--p2);box-shadow:0 0 36px rgba(124,58,237,0.65);transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:var(--t);
+  border:1.5px solid rgba(255,255,255,0.28);
+  padding:0.75rem 1.875rem;border-radius:100px;
+  font-size:0.9375rem;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  transition:all 0.25s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04)}
+.partners{
+  position:relative;z-index:5;margin-top:4rem;
+  animation:fadeUp 0.8s 0.35s ease both;
+}
+.partners-lbl{
+  font-size:0.68rem;font-weight:700;letter-spacing:0.14em;
+  color:var(--c2);text-transform:uppercase;margin-bottom:1.5rem;
+}
+.partners-logos{display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap}
+.p-logo{color:rgba(255,255,255,0.3);font-size:0.875rem;font-weight:700;transition:color 0.2s;cursor:default}
+.p-logo:hover{color:rgba(255,255,255,0.6)}
+.p-logo svg{width:18px;height:18px;fill:currentColor;vertical-align:middle;margin-right:5px}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* ══ STATS SECTION ══ */
+.stats-sec{
+  position:relative;
+  display:grid;grid-template-columns:1fr 1fr;
+  max-width:1200px;margin:0 auto;
+  padding:6rem 3rem 3rem;
+  gap:4rem;align-items:center;
+}
+.stats-title{
+  font-size:clamp(1.6rem,3vw,2.5rem);
+  font-weight:700;line-height:1.3;margin-bottom:0.5rem;
+  letter-spacing:-0.02em;
+}
+.stats-sub{color:var(--t3);font-size:0.8rem;margin-top:0.75rem}
+
+/* 3D ribbon ball via canvas */
+.ball-wrap{display:flex;align-items:center;justify-content:center}
+#ball-canvas{display:block}
+
+.stats-nums{display:flex;flex-direction:column;gap:2.5rem}
+.stat-item .num{
+  font-size:clamp(3rem,6vw,5rem);
+  font-weight:900;line-height:1;letter-spacing:-0.05em;display:block;
+}
+.num-purple{color:var(--p4)}
+.num-cyan{color:var(--c2)}
+.num-grad{
+  background:linear-gradient(90deg,var(--c2),var(--g2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-item .lbl{
+  font-size:0.65rem;font-weight:700;letter-spacing:0.12em;
+  color:var(--t3);text-transform:uppercase;margin-top:6px;display:block;
+}
+
+/* ══ SUITE ══ */
+.suite-sec{
+  max-width:1200px;margin:0 auto;
+  padding:2rem 3rem 5rem;
+  display:grid;grid-template-columns:300px 1fr;
+  gap:5rem;align-items:start;
+}
+.suite-head h2{
+  font-size:clamp(1.5rem,2.5vw,2.2rem);
+  font-weight:700;line-height:1.35;margin-bottom:0.4rem;
+  letter-spacing:-0.02em;
+}
+.suite-head small{color:var(--t3);font-size:0.78rem}
+.suite-cards{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.suite-card{
+  padding:1.75rem;
+  border:1px solid var(--bdr);
+  margin:-1px 0 0 -1px;
+  background:var(--bg);
+  transition:background 0.25s;
+}
+.suite-card:hover{background:var(--card)}
+.suite-card-top{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:0.75rem;
+}
+.suite-pipe{width:3px;height:18px;border-radius:2px;background:var(--p3);flex-shrink:0}
+.suite-card h3{font-size:1rem;font-weight:700;letter-spacing:-0.01em}
+.suite-card p{color:var(--t2);font-size:0.8125rem;line-height:1.7;margin-bottom:1.25rem}
+.suite-metric{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em}
+.suite-metric-lbl{font-size:0.65rem;font-weight:600;letter-spacing:0.1em;color:var(--t3);text-transform:uppercase;margin-top:4px}
+
+/* ══ WHY SECTION ══ */
+.why-sec{padding:5rem 0;text-align:center;overflow:hidden}
+.why-sec h2{
+  font-size:clamp(2.5rem,6vw,5rem);
+  font-weight:800;letter-spacing:-0.04em;margin-bottom:1rem;
+  padding:0 2rem;
+}
+.why-sec h2 .acc{color:var(--p3)}
+.why-sub{
+  color:var(--t2);font-size:0.9375rem;
+  max-width:700px;margin:0 auto 3.5rem;
+  line-height:1.75;padding:0 2rem;
+}
+/* Horizontal scrolling feature rows */
+.feat-rows{display:flex;flex-direction:column;gap:0}
+.feat-row{
+  display:flex;
+  border-top:1px solid var(--bdr);
+  border-bottom:1px solid var(--bdr);
+  margin-top:-1px;
+  overflow:hidden;
+  position:relative;
+}
+.feat-row-inner{
+  display:flex;
+  animation:scrollLeft 30s linear infinite;
+}
+.feat-row:nth-child(2) .feat-row-inner{animation-direction:reverse;animation-duration:25s}
+.feat-row:nth-child(3) .feat-row-inner{animation-duration:35s}
+.feat-row:hover .feat-row-inner{animation-play-state:paused}
+@keyframes scrollLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.feat-item{
+  display:flex;flex-direction:column;
+  padding:1.25rem 2rem;
+  border-right:1px solid var(--bdr);
+  min-width:320px;flex-shrink:0;
+  cursor:pointer;transition:background 0.2s;
+  text-align:left;
+}
+.feat-item:hover{background:rgba(124,58,237,0.06)}
+.feat-item-head{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:0.35rem;
+}
+.feat-item-head h4{font-size:0.9375rem;font-weight:700}
+.feat-arrow-box{
+  width:24px;height:24px;border:1px solid var(--bdr);border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.75rem;color:var(--t3);flex-shrink:0;
+  transition:all 0.2s;
+}
+.feat-item:hover .feat-arrow-box{background:var(--p);color:#fff;border-color:var(--p)}
+.feat-desc{font-size:0.8125rem;color:var(--c);line-height:1.5}
+
+/* ══ API SECTION ══ */
+.api-sec{
+  position:relative;
+  padding:7rem 2rem;text-align:center;
+  overflow:hidden;
+  background:var(--bg);
+}
+#wave-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;
+}
+.api-sec h2{
+  position:relative;z-index:2;
+  font-size:clamp(2rem,5.5vw,4.5rem);
+  font-weight:800;letter-spacing:-0.04em;
+  line-height:1.1;margin-bottom:1rem;
+}
+.api-sec h2 .acc{
+  background:linear-gradient(90deg,var(--p3),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.api-sub{position:relative;z-index:2;color:var(--t2);margin-bottom:2.5rem;font-size:1rem}
+.api-cta{position:relative;z-index:2}
+
+/* ══ INDUSTRY ══ */
+.industry-sec{
+  padding:5rem 3rem;text-align:center;
+  background:linear-gradient(180deg,var(--bg) 0%,#04040d 100%);
+}
+.ind-tag{font-size:0.8rem;font-weight:600;color:var(--c2);margin-bottom:0.5rem;letter-spacing:0.05em}
+.industry-sec h2{
+  font-size:clamp(3rem,7vw,6rem);
+  font-weight:800;letter-spacing:-0.05em;
+  line-height:1;margin-bottom:3.5rem;
+}
+.industry-sec h2 .acc{color:var(--p3)}
+.ind-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:14px;max-width:1200px;margin:0 auto;
+}
+.ind-card{
+  background:var(--card);border:1px solid var(--bdr);
+  border-radius:14px;padding:1.5rem;text-align:left;
+  transition:border-color 0.3s,transform 0.3s;cursor:pointer;
+}
+.ind-card:hover{border-color:rgba(124,58,237,0.4);transform:translateY(-4px)}
+.ind-card h3{font-size:0.9375rem;font-weight:700;margin-bottom:0.75rem;color:var(--c2)}
+.ind-card p{font-size:0.8rem;color:var(--t2);line-height:1.7;margin-bottom:1rem}
+.know{font-size:0.8rem;color:var(--t);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.know:hover{color:var(--c2)}
+
+/* ══ FUTURE ══ */
+.future-sec{
+  position:relative;padding:8rem 2rem;text-align:center;overflow:hidden;
+}
+.future-glow-bot{
+  position:absolute;bottom:-30%;left:50%;transform:translateX(-50%);
+  width:800px;height:600px;
+  background:radial-gradient(ellipse,rgba(124,58,237,0.28) 0%,transparent 65%);
+  pointer-events:none;animation:gpulse 5s ease-in-out infinite;
+}
+@keyframes gpulse{0%,100%{opacity:0.6}50%{opacity:1}}
+.future-orb{
+  position:relative;z-index:2;
+  width:52px;height:52px;border-radius:50%;
+  background:conic-gradient(var(--p),var(--c),var(--g),var(--p));
+  animation:spin 6s linear infinite;
+  margin:0 auto 1.75rem;
+}
+.future-orb::after{content:'';position:absolute;inset:7px;background:var(--bg);border-radius:50%}
+.future-sec h2{
+  position:relative;z-index:2;
+  font-size:clamp(3rem,8vw,6.5rem);
+  font-weight:800;letter-spacing:-0.05em;
+  line-height:1.05;margin-bottom:3rem;
+}
+.future-sec h2 .acc{color:var(--p3)}
+.future-btns{position:relative;z-index:2;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ══ FOOTER ══ */
+footer{
+  background:var(--bg2);border-top:1px solid var(--bdr);
+  padding:3.5rem 3rem 2rem;
+}
+.foot-inner{max-width:1200px;margin:0 auto}
+.foot-top{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr 1fr;gap:2.5rem;margin-bottom:3rem}
+.foot-logo{font-size:1.3rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.3rem;display:flex;align-items:center;gap:2px}
+.foot-logo .o{color:var(--c)}
+.foot-tag{font-size:0.65rem;font-weight:700;color:var(--c);letter-spacing:0.08em;margin-bottom:0.75rem}
+.foot-desc{font-size:0.8rem;color:var(--t3);line-height:1.65;max-width:200px}
+.foot-col h4{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--t);margin-bottom:1rem}
+.foot-col a{display:block;font-size:0.8rem;color:var(--t3);text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s}
+.foot-col a:hover{color:var(--t)}
+.foot-social a{display:flex;align-items:center;gap:8px;font-size:0.8rem;color:var(--t3);text-decoration:none;margin-bottom:0.6rem;transition:color 0.2s}
+.foot-social a:hover{color:var(--t)}
+.s-ico{width:20px;height:20px;background:var(--bdr);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;flex-shrink:0}
+.foot-bottom{border-top:1px solid var(--bdr);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;color:var(--t3)}
+
+/* ══ REVEAL ══ */
+.rev{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rev.on{opacity:1;transform:none}
+.rev-l{opacity:0;transform:translateX(-28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.rev-l.on{opacity:1;transform:none}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:1024px){
+  .stats-sec{grid-template-columns:1fr;padding:4rem 2rem 2rem;gap:3rem;text-align:center}
+  .stats-nums{flex-direction:row;flex-wrap:wrap;justify-content:center;gap:2.5rem}
+  .suite-sec{grid-template-columns:1fr;gap:2rem;padding:2rem 2rem 4rem}
+  .suite-cards{grid-template-columns:1fr}
+  .ind-grid{grid-template-columns:repeat(2,1fr)}
+  .foot-top{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:768px){
+  nav{padding:0 1.5rem}
+  .nav-links,.nav-btn{display:none}
+  .hamburger{display:flex}
+  .ind-grid{grid-template-columns:1fr}
+  .foot-top{grid-template-columns:1fr}
+  .foot-bottom{flex-direction:column;gap:0.75rem;text-align:center}
+  .feat-item{min-width:260px}
+  .stats-nums{flex-direction:column;align-items:center}
+  .stats-sec{padding:4rem 1.5rem 2rem}
+  .suite-sec{padding:1.5rem 1.5rem 3rem}
+  .industry-sec{padding:4rem 1.5rem}
+}
+.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(0,0,0,0.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);padding:1.5rem 2rem;z-index:199;flex-direction:column;gap:1rem}
+.mob-menu.open{display:flex}
+.mob-menu a{color:var(--t2);text-decoration:none;font-size:1rem;font-weight:500;padding:0.625rem 0;border-bottom:1px solid var(--bdr)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="logo-wrap">
+    <div class="logo-text">Uz<span class="logo-o-ring"></span>Fin</div>
+    <div class="logo-sub">Connect. Control. Comply</div>
+  </div>
+  <div class="nav-links">
+    <a href="#" class="act">AI Banking</a>
+    <a href="#">Payments <span class="chevron">▾</span></a>
+    <a href="#">Payouts <span class="chevron">▾</span></a>
+    <a href="#">Support</a>
+  </div>
+  <button class="nav-btn">START BUILDING →</button>
+  <div class="hamburger" onclick="document.getElementById('mob').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-menu" id="mob">
+  <a href="#">AI Banking</a><a href="#">Payments</a><a href="#">Payouts</a><a href="#">Support</a>
+  <button class="btn-solid" style="margin-top:0.5rem">START BUILDING →</button>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="arc-left"></div>
+  <div class="arc-right"></div>
+  <div class="arc-left-fill"></div>
+  <div class="arc-right-fill"></div>
+  <!-- Animated arc canvas -->
+  <canvas id="arc-c" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3"></canvas>
+  <div class="hero-content">
+    <h1>AI-powered <span class="grad">Banking &amp; Payment Solutions</span><br/>built for Modern Businesses</h1>
+    <p>UzOfin brings intelligent automation, real-time payments, and seamless financial operations together so you can scale without friction.</p>
+    <div class="hero-btns">
+      <button class="btn-solid">START BUILDING →</button>
+      <button class="btn-ghost">READ DOCS →</button>
+    </div>
+  </div>
+  <div class="partners">
+    <div class="partners-lbl">Powering tools and integration for companies around the world</div>
+    <div class="partners-logos">
+      <span class="p-logo">🛡 brave</span>
+      <span class="p-logo">◎ CIRCLE</span>
+      <span class="p-logo">⊟ Discord</span>
+      <span class="p-logo">Google</span>
+      <span class="p-logo">jump_</span>
+      <span class="p-logo">lollapalooza</span>
+      <span class="p-logo">✦ MAGIC EDEN</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="stats-sec">
+    <div class="rev-l">
+      <div class="stats-title">Your Business Pays Are Now<br/>Faster and Secure</div>
+      <p class="stats-sub">* Tools That Accelerate Every Step Of Your Financial Workflow.</p>
+      <!-- 3D ribbon ball canvas -->
+      <div class="ball-wrap" style="margin-top:3rem">
+        <canvas id="ball-canvas" width="320" height="320"></canvas>
+      </div>
+    </div>
+    <div class="stats-nums rev">
+      <div class="stat-item">
+        <span class="num num-purple"><span class="count" data-val="11.5" data-dec="1">0</span>M+</span>
+        <span class="lbl">Transactions processed monthly</span>
+      </div>
+      <div class="stat-item">
+        <span class="num num-cyan"><span class="count" data-val="99.9" data-dec="1">0</span>%</span>
+        <span class="lbl">Platform uptime and reliability</span>
+      </div>
+      <div class="stat-item">
+        <span class="num"><span class="num-grad"><span class="count" data-val="70" data-dec="0">0</span>%</span> <span style="color:var(--c2);font-size:0.55em;vertical-align:middle">Faster</span></span>
+        <span class="lbl">Merchant onboarding with AI automation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUITE -->
+<section>
+  <div class="suite-sec rev">
+    <div class="suite-head">
+      <h2>Our Intelligent<br/>Financial Suite</h2>
+      <small>* Tools That Accelerate Every Step Of Your Financial Workflow.</small>
+    </div>
+    <div class="suite-cards">
+      <div class="suite-card">
+        <div class="suite-card-top"><div class="suite-pipe"></div><h3>AI Banking</h3></div>
+        <p>Smart, automated digital banking for businesses. Instant onboarding, intelligent insights, and real-time account operations.</p>
+        <div class="suite-metric">*3,969</div>
+        <div class="suite-metric-lbl">Transactions per second</div>
+      </div>
+      <div class="suite-card">
+        <div class="suite-card-top"><div class="suite-pipe"></div><h3>Payments</h3></div>
+        <p>Fast, secure, and scalable payment infrastructure. Send and receive money globally with ease.</p>
+        <div class="suite-metric">*1,675</div>
+        <div class="suite-metric-lbl">Validator nodes</div>
+      </div>
+      <div class="suite-card">
+        <div class="suite-card-top"><div class="suite-pipe"></div><h3>Payouts</h3></div>
+        <p>Bulk, automated payouts built for high-volume businesses. Reliable, trackable, and lightning-fast disbursements.</p>
+        <div class="suite-metric">*163,077,581,394</div>
+        <div class="suite-metric-lbl">Total transactions</div>
+      </div>
+      <div class="suite-card">
+        <div class="suite-card-top"><div class="suite-pipe"></div><h3>Merchant Onboarding</h3></div>
+        <p>Frictionless onboarding for merchants at any scale. Automated KYC, verification, and risk assessments—done in minutes.</p>
+        <div class="suite-metric">100%</div>
+        <div class="suite-metric-lbl">On-time merchant onboard</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why-sec rev">
+  <h2>Why <span class="acc">UzOFin?</span></h2>
+  <p class="why-sub">Discover endless creativity with PromptVerse. Generate diverse content effortlessly using prompts. Stay updated with real-time trends, automate tasks, and extract insights from any document or URL. All within a sleek, futuristic design. Create more, effortlessly.</p>
+  <div class="feat-rows">
+    <!-- Row 1 — scrolls left -->
+    <div class="feat-row">
+      <div class="feat-row-inner" id="row1"></div>
+    </div>
+    <!-- Row 2 — scrolls right -->
+    <div class="feat-row">
+      <div class="feat-row-inner" id="row2"></div>
+    </div>
+    <!-- Row 3 — scrolls left slower -->
+    <div class="feat-row">
+      <div class="feat-row-inner" id="row3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- API -->
+<section class="api-sec">
+  <canvas id="wave-canvas"></canvas>
+  <h2>Build Faster with Our <span class="acc">Powerful API's</span></h2>
+  <p class="api-sub">Plug into secure, developer-friendly financial API's and launch in days, not months</p>
+  <div class="api-cta"><button class="btn-solid" style="font-size:0.875rem;padding:0.65rem 1.75rem;margin:0 auto">START BUILDING →</button></div>
+</section>
+
+<!-- INDUSTRY -->
+<section class="industry-sec rev">
+  <div class="ind-tag">24/7 support</div>
+  <h2>Industry <span class="acc">Standard</span></h2>
+  <div class="ind-grid">
+    <div class="ind-card"><h3>Scalability &amp; Integration</h3><p>Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed.</p><span class="know">Know more</span></div>
+    <div class="ind-card"><h3>Step-by-step guide</h3><p>Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed.</p><span class="know">Know more</span></div>
+    <div class="ind-card"><h3>SaaS based solution</h3><p>Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed.</p><span class="know">Know more</span></div>
+    <div class="ind-card"><h3>More Features</h3><p>Lorem ipsum is a dummy or placeholder text commonly used in graphic design, publishing, and web development. Its purpose is to permit a page layout to be designed.</p><span class="know">Know more</span></div>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section class="future-sec">
+  <div class="future-glow-bot"></div>
+  <div class="future-orb"></div>
+  <h2>The future of your<br/>industry <span class="acc">starts here</span></h2>
+  <div class="future-btns">
+    <button class="btn-solid" style="font-size:0.9375rem;padding:0.75rem 1.875rem">BOOK A DEMO →</button>
+    <button class="btn-ghost" style="font-size:0.9375rem;padding:0.75rem 1.875rem">BUILD AI →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo">Uz<span class="o">O</span>Fin</div>
+        <div class="foot-tag">Connect. Control. Comply</div>
+        <p class="foot-desc">Experience the new age of payments with UzOfin and explore new growth opportunities to reach greater heights.</p>
+      </div>
+      <div class="foot-col"><h4>Products</h4><a href="#">AI Banking</a><a href="#">Payment</a><a href="#">Payout</a><a href="#">Merchant Onboarding</a><a href="#">FRM</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Help Center</a><a href="#">Contact</a></div>
+      <div class="foot-col"><h4>Legal</h4><a href="#">Cookie Policy</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      <div class="foot-col foot-social"><h4>Social</h4><a href="#"><div class="s-ico">f</div>/uzofin</a><a href="#"><div class="s-ico">𝕏</div>/uzofin</a><a href="#"><div class="s-ico">in</div>/uzofin</a><a href="#"><div class="s-ico">▶</div>/uzofin</a></div>
+    </div>
+    <div class="foot-bottom"><span>Copyright © 2025 UZOFIN. All rights reserved.</span><span>FAQ | (EN)</span></div>
+  </div>
+</footer>
+
+<script>
+// ══ NAV SCROLL ══
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.background=scrollY>40?'rgba(0,0,0,0.9)':'rgba(0,0,0,0.6)';
+});
+
+// ══ HERO ARC CANVAS ══
+(()=>{
+  const c=document.getElementById('arc-c'),ctx=c.getContext('2d');
+  let t=0;
+  function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  rs();window.addEventListener('resize',rs);
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    const cx=c.width/2,cy=c.height*0.38;
+    // Subtle animated arcs overlaid on the CSS arc shapes
+    for(let i=0;i<4;i++){
+      const rx=c.width*(0.35+i*0.08)+Math.sin(t*0.3+i)*8;
+      const ry=c.height*(0.45+i*0.05);
+      ctx.save();ctx.translate(cx,cy);
+      ctx.beginPath();
+      ctx.ellipse(0,0,rx,ry,Math.PI*(-0.08+i*0.02),0,Math.PI*2);
+      const alpha=0.05-i*0.008;
+      ctx.strokeStyle=`rgba(${i%2?'124,58,237':'6,182,212'},${alpha+Math.sin(t+i)*0.015})`;
+      ctx.lineWidth=1;ctx.stroke();ctx.restore();
+    }
+    t+=0.015;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ══ 3D RIBBON BALL ══
+(()=>{
+  const c=document.getElementById('ball-canvas'),ctx=c.getContext('2d');
+  const W=320,H=320,cx=W/2,cy=H/2;
+  let t=0;
+  const colors=['#ff6b35','#f7931e','#ff3d8b','#a855f7','#7c3aed','#06b6d4','#10b981'];
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    // Draw many ribbon strands to simulate the 3D ball
+    const strands=22;
+    for(let s=0;s<strands;s++){
+      const phase=s*(Math.PI*2/strands)+t;
+      const tilt=Math.PI*0.3+Math.sin(t*0.4+s*0.2)*0.15;
+      const R=110;
+      const pts=[];
+      for(let a=0;a<=Math.PI*2;a+=0.08){
+        const x3=R*Math.cos(a);
+        const y3=R*Math.sin(a)*Math.cos(tilt);
+        const z3=R*Math.sin(a)*Math.sin(tilt);
+        // Rotate around Y
+        const cosP=Math.cos(phase),sinP=Math.sin(phase);
+        const rx=x3*cosP+z3*sinP;
+        const rz=-x3*sinP+z3*cosP;
+        // perspective
+        const scale=1+rz/400;
+        pts.push({x:cx+rx*scale,y:cy+y3*scale,z:rz,scale});
+      }
+      // Color based on position
+      const ci=Math.floor((s/strands)*colors.length);
+      const col=colors[ci];
+      const hex2rgb=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+      const [r,g,b]=hex2rgb(col);
+      ctx.beginPath();
+      pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));
+      ctx.strokeStyle=`rgba(${r},${g},${b},0.55)`;
+      ctx.lineWidth=2.5;ctx.stroke();
+    }
+    // Center glow
+    const grd=ctx.createRadialGradient(cx,cy,0,cx,cy,80);
+    grd.addColorStop(0,'rgba(124,58,237,0.2)');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.beginPath();ctx.arc(cx,cy,80,0,Math.PI*2);ctx.fill();
+    t+=0.018;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ══ WAVE CANVAS ══
+(()=>{
+  const c=document.getElementById('wave-canvas'),ctx=c.getContext('2d');
+  let t=0;
+  function rs(){c.width=c.offsetWidth;c.height=c.offsetHeight}
+  rs();window.addEventListener('resize',rs);
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    const W=c.width,H=c.height,cy=H/2;
+    // Draw converging/diverging wave lines like Figma
+    for(let w=0;w<8;w++){
+      const amp=25+w*12;
+      const freq=0.006;
+      const speed=t*(0.5+w*0.08);
+      const alpha=0.08-w*0.008;
+      const spread=w*0.15;
+      ctx.beginPath();
+      for(let x=0;x<=W;x+=3){
+        // Create the converging effect — waves narrow in center
+        const distFromCenter=Math.abs(x-W/2)/(W/2);
+        const envelope=0.3+distFromCenter*0.7;
+        const y=cy+Math.sin(x*freq+speed)*amp*envelope+Math.sin(x*freq*1.7-speed*0.6)*amp*0.3*envelope;
+        x===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+      }
+      const hue=w%2===0?270:200;
+      ctx.strokeStyle=`hsla(${hue},70%,60%,${alpha})`;
+      ctx.lineWidth=w<4?1.5:1;ctx.stroke();
+    }
+    t+=0.5;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ══ FEATURE ROWS ══
+const rows=[
+  {id:'row1',items:[
+    {title:'Dashboard',desc:'Manage banking, payments, and merchants in one place.'},
+    {title:'Unified Dashboard',desc:'Manage banking, payments, and merchants in one place.'},
+    {title:'Write a attractive hero title',desc:'https://zeltalabs.com/'},
+    {title:'Multiple Pay Options',desc:'Give your customers more payment choices.'},
+    {title:'AI-Driven Decisions',desc:'Automate approvals, verification, and financial operations.'},
+    {title:'Transparent Pricing',desc:'No hidden fees, clear and simple pricing.'},
+  ]},
+  {id:'row2',items:[
+    {title:'Automation At Its Finest',desc:'Automate your entire payment process from authorization to settlement.'},
+    {title:'Transparent Pricing',desc:'The flexibility to pay with various payment options like cards, wallets, etc.'},
+    {title:'Various payment options',desc:'Give your customers more choices.'},
+    {title:'Enterprise-Grade Security',desc:'Bank-level encryption and compliance.'},
+    {title:'Developer-Friendly APIsite',desc:'Build, integrate, and launch faster.'},
+  ]},
+  {id:'row3',items:[
+    {title:'Enterprise-Grade Security',desc:'Bank-level encryption and compliance.'},
+    {title:'Developer-Friendly APIsite',desc:'Build, integrate, and launch faster.'},
+    {title:'Developer-Friendly APIsite',desc:'Build, integrate, and launch faster.'},
+    {title:'Unified Dashboard',desc:'Manage banking, payments, and merchants in one place.'},
+    {title:'Scalable Infrastructure',desc:'Designed for startups to enterprises.'},
+    {title:'Real-time Analytics',desc:'Monitor transactions and insights in real time.'},
+  ]}
+];
+rows.forEach(({id,items})=>{
+  const el=document.getElementById(id);
+  // Duplicate for infinite scroll
+  const all=[...items,...items];
+  el.innerHTML=all.map(it=>`
+    <div class="feat-item">
+      <div class="feat-item-head">
+        <h4>${it.title}</h4>
+        <div class="feat-arrow-box">↗</div>
+      </div>
+      <p class="feat-desc">${it.desc}</p>
+    </div>`).join('');
+});
+
+// ══ INTERSECTION OBSERVER ══
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.rev,.rev-l').forEach(el=>io.observe(el));
+
+// Stagger cards
+document.querySelectorAll('.suite-card,.ind-card').forEach((el,i)=>{el.style.transitionDelay=(i%4)*0.08+'s'});
+
+// ══ COUNT UP ══
+const cio=new IntersectionObserver(es=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      const el=e.target,target=parseFloat(el.dataset.val),dec=parseInt(el.dataset.dec)||0;
+      let start=null,dur=1600;
+      const step=ts=>{
+        if(!start)start=ts;
+        const p=Math.min((ts-start)/dur,1);
+        const ease=1-Math.pow(1-p,3);
+        const v=target*ease;
+        el.textContent=dec>0?v.toFixed(dec):Math.floor(v);
+        if(p<1)requestAnimationFrame(step);else el.textContent=dec>0?target.toFixed(dec):target;
+      };
+      requestAnimationFrame(step);
+      cio.unobserve(el);
+    }
+  });
+},{threshold:0.5});
+document.querySelectorAll('.count').forEach(el=>cio.observe(el));
+</script>
+</body>
+</html>
