@@ -5,14 +5,26 @@ Upfinzo Landing Page
 React + Tailwind CSS (CDN)
 Architecture: Component-Based (Scalable & Maintainable)
 Author: AI-generated from Figma design
+-->
 
-Project Architecture:
-The UPFINZO landing page follows a clean and scalable React architecture.
-The project is organized into multiple folders for better maintainability
-and reusability.
+## Project Overview
 
-Folder Structure:
+The **UPFINZO Landing Page** is built using **React** and **Tailwind CSS (CDN)** following a **clean, scalable, and component-based architecture**.
 
+The project is structured for **maintainability**, **reusability**, and **performance optimization**.
+
+---
+
+## Project Architecture
+
+The UPFINZO landing page follows a **clean and scalable React architecture**.
+The project is organized into multiple folders for better maintainability and reusability.
+
+---
+
+## 📂 Folder Structure
+
+```
 src/
 ├── components/   → Reusable UI components (Navbar, Footer, Button, Card)
 ├── sections/     → Page sections (Hero, Stats, Suite, Why, API, etc.)
@@ -22,9 +34,13 @@ src/
 ├── assets/       → Images, icons, and fonts
 ├── App.jsx       → Root component
 └── main.jsx      → Entry point
+```
 
-Component Tree:
+---
 
+## 🌳 Component Tree
+
+```
 <App>
   ├── Navbar
   ├── HeroSection
@@ -35,24 +51,43 @@ Component Tree:
   ├── IndustrySection
   ├── FutureSection
   └── Footer
+```
 
-Hooks Used:
+---
 
-useState  → Mobile menu toggle
-useEffect → Animations
-useRef    → Canvas DOM reference
+## Hooks Used
 
-Features:
+| Hook      | Purpose              |
+| --------- | -------------------- |
+| useState  | Mobile menu toggle   |
+| useEffect | Animations           |
+| useRef    | Canvas DOM reference |
 
-- Clean component-based architecture
-- Reusable components
-- Scalable folder structure
-- Responsive design
-- Smooth animations
-- Performance optimized
--->
+---
+
+##  Features
+
+* Clean component-based architecture
+* Reusable components
+* Scalable folder structure
+* Responsive design
+* Smooth animations
+* Performance optimized
+
+---
+
+##  Tech Stack
+
+* React
+* Tailwind CSS (CDN)
+* JavaScript (ES6+)
+
+---
+
+##  Author
+
+**Ajay Yadav**
+
+---
 
 
-# Author
-
-Ajay Yadav
