@@ -4,9 +4,9 @@ A modern landing page built using **React.js** and **Tailwind CSS** with clean c
 
 ---
 
-# 📁 Project Structure
+#  Project Structure
 
-```
+
 src/
 ├── components/
 │   ├── Navbar.jsx
@@ -26,11 +26,11 @@ src/
 │
 ├── App.jsx
 └── main.jsx
-```
+
 
 ---
 
-# 🧩 Component Architecture
+#  Component Architecture
 
 ```
 <App>
@@ -47,7 +47,7 @@ src/
 
 ---
 
-# 🚀 App.jsx
+#  App.jsx
 
 ```jsx
 import Navbar from "./components/Navbar"
@@ -80,18 +80,18 @@ function App() {
 export default App
 ```
 
----
 
-# ⚙️ Tech Stack
+
+#  Tech Stack
 
 * React.js
 * Tailwind CSS
 * JavaScript
 * HTML5
 
----
 
-# 📌 Features
+
+#  Features
 
 * Component-based architecture
 * Clean folder structure
@@ -99,16 +99,15 @@ export default App
 * Reusable components
 * Smooth animations
 
----
 
-# 🪝 Hooks Used
+#  Hooks Used
 
 * useState → UI toggle
 * useEffect → Animation & lifecycle
 * useRef → DOM reference
 
----
 
-# 👨‍💻 Author
+
+# Author
 
 Ajay Yadav
