@@ -38,7 +38,7 @@ src/
 
 ---
 
-## 🌳 Component Tree
+## Component Tree
 
 ```
 <App>
